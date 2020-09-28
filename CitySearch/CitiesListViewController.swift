@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CitiesListViewController.swift
 //  CitySearch
 //
 //  Created by Noel Achkar on 9/28/20.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CitiesListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
