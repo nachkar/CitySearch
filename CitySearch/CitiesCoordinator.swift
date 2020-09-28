@@ -16,9 +16,18 @@ class CitiesCoordinator: Coordinator {
     }
 
     override func start() {
-        let viewController = AppDelegate.storyBoard.getViewController(identifier: .citiesList)
+        let viewModel = CitiesViewModel()
+        viewModel.coordinatorDelegate = self
+        let viewController = AppDelegate.storyBoard.getViewController(identifier: .citiesList) as! CitiesListViewController
+        viewController.viewModel = viewModel
         let navigationController = UINavigationController.init(rootViewController: viewController)
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
+    }
+}
+
+extension CitiesCoordinator : CitiesCoordinatorDelegate {
+    func didSelectCity(viewModel: CitiesTableViewCellViewModel) {
+        
     }
 }

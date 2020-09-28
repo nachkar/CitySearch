@@ -12,6 +12,8 @@ class CitiesListViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    var viewModel: CitiesViewModel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
