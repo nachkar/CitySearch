@@ -17,9 +17,11 @@
 		62ED72F52521F1E2004FD480 /* CityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62ED72F42521F1E2004FD480 /* CityViewController.swift */; };
 		62ED72FA2521F24E004FD480 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62ED72F92521F24E004FD480 /* Constants.swift */; };
 		62ED73002521F297004FD480 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62ED72FF2521F297004FD480 /* MapKit.framework */; };
-		62ED73062521F30A004FD480 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62ED73052521F30A004FD480 /* AppCoordinator.swift */; };
+		62ED73062521F30A004FD480 /* CitiesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62ED73052521F30A004FD480 /* CitiesCoordinator.swift */; };
 		62ED730B2521F3DB004FD480 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62ED730A2521F3DB004FD480 /* Coordinator.swift */; };
 		62ED73102521F4B4004FD480 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62ED730F2521F4B4004FD480 /* Utilities.swift */; };
+		62ED73182521F7DE004FD480 /* CityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62ED73172521F7DE004FD480 /* CityCoordinator.swift */; };
+		62ED731D2521F8F0004FD480 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62ED731C2521F8F0004FD480 /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,9 +58,11 @@
 		62ED72F42521F1E2004FD480 /* CityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityViewController.swift; sourceTree = "<group>"; };
 		62ED72F92521F24E004FD480 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		62ED72FF2521F297004FD480 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		62ED73052521F30A004FD480 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppCoordinator.swift; path = CitySearch/AppCoordinator.swift; sourceTree = SOURCE_ROOT; };
+		62ED73052521F30A004FD480 /* CitiesCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CitiesCoordinator.swift; path = CitySearch/CitiesCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		62ED730A2521F3DB004FD480 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		62ED730F2521F4B4004FD480 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		62ED73172521F7DE004FD480 /* CityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCoordinator.swift; sourceTree = "<group>"; };
+		62ED731C2521F8F0004FD480 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,7 @@
 			children = (
 				62ED73042521F2FC004FD480 /* Coordinators */,
 				62ED72BB2521F109004FD480 /* AppDelegate.swift */,
+				62ED731C2521F8F0004FD480 /* BaseViewController.swift */,
 				62ED72BF2521F109004FD480 /* CitiesListViewController.swift */,
 				62ED72F42521F1E2004FD480 /* CityViewController.swift */,
 				62ED72F92521F24E004FD480 /* Constants.swift */,
@@ -154,7 +159,8 @@
 		62ED73042521F2FC004FD480 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				62ED73052521F30A004FD480 /* AppCoordinator.swift */,
+				62ED73052521F30A004FD480 /* CitiesCoordinator.swift */,
+				62ED73172521F7DE004FD480 /* CityCoordinator.swift */,
 				62ED730A2521F3DB004FD480 /* Coordinator.swift */,
 			);
 			path = Coordinators;
@@ -294,7 +300,9 @@
 				62ED72BC2521F109004FD480 /* AppDelegate.swift in Sources */,
 				62ED73102521F4B4004FD480 /* Utilities.swift in Sources */,
 				62ED730B2521F3DB004FD480 /* Coordinator.swift in Sources */,
-				62ED73062521F30A004FD480 /* AppCoordinator.swift in Sources */,
+				62ED73062521F30A004FD480 /* CitiesCoordinator.swift in Sources */,
+				62ED731D2521F8F0004FD480 /* BaseViewController.swift in Sources */,
+				62ED73182521F7DE004FD480 /* CityCoordinator.swift in Sources */,
 				62ED72F52521F1E2004FD480 /* CityViewController.swift in Sources */,
 				62ED72FA2521F24E004FD480 /* Constants.swift in Sources */,
 			);

@@ -20,20 +20,29 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="sCN-zJ-hm7">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="uHr-PS-dbU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="1fY-R0-cVd"/>
+                            <constraint firstItem="sCN-zJ-hm7" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="42w-jP-OFa"/>
                             <constraint firstItem="uHr-PS-dbU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="IgU-qc-jo7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="uHr-PS-dbU" secondAttribute="bottom" id="MIc-O0-s2j"/>
+                            <constraint firstItem="sCN-zJ-hm7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Q6U-Np-oeK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="uHr-PS-dbU" secondAttribute="trailing" id="hn6-Ae-QLM"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="sCN-zJ-hm7" id="EpX-Dr-IH7"/>
+                        <outlet property="tableView" destination="uHr-PS-dbU" id="3sO-f8-PCy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-559" y="64"/>
+            <point key="canvasLocation" x="-559.4202898550725" y="63.616071428571423"/>
         </scene>
         <!--City View Controller-->
         <scene sceneID="Gin-0R-5x4">
@@ -56,6 +65,9 @@
                             <constraint firstItem="466-aW-lwO" firstAttribute="leading" secondItem="Gnq-3h-3Sk" secondAttribute="leading" id="EJD-t7-vOZ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="466-aW-lwO" id="Vmu-lh-jUp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nGO-6P-CBU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

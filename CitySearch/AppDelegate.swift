@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return storyboard
     }
     
-    private lazy var appCoordinator = AppCoordinator(navigationController: UINavigationController(), window: window!)
+    private lazy var appCoordinator = CitiesCoordinator(window: window!)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

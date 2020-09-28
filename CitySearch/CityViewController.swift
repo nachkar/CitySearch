@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import MapKit
 
-class CityViewController: UIViewController {
+class CityViewController: BaseViewController {
+
+    @IBOutlet weak var mapView: MKMapView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
