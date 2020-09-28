@@ -19,6 +19,10 @@ class CitiesViewModel: NSObject {
         getCities()
     }
     
+    func citySelected(city : CitiesTableViewCellViewModel) {
+        self.coordinatorDelegate?.didSelectCity(viewModel: city)
+    }
+    
     func getCities() {
 //        do
 //        {

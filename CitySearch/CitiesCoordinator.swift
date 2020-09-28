@@ -28,6 +28,7 @@ class CitiesCoordinator: Coordinator {
 
 extension CitiesCoordinator : CitiesCoordinatorDelegate {
     func didSelectCity(viewModel: CitiesTableViewCellViewModel) {
-        
+        let cityCoordinator = CityCoordinator(navigationController: (self.window.rootViewController?.navigationController)!)
+        cityCoordinator.start()
     }
 }

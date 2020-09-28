@@ -10,8 +10,6 @@ import UIKit
 extension CitiesListViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let cityCoordinator = CityCoordinator(navigationController: self.navigationController!)
-        cityCoordinator.start()
+        viewModel.citySelected(city: viewModel.items[indexPath.row])
     }
 }
