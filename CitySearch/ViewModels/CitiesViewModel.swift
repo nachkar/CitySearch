@@ -15,8 +15,10 @@ class CitiesViewModel: NSObject {
         
     var coordinatorDelegate: CitiesCoordinatorDelegate?
     var tmpArray = [CitiesDataItem]()
-    let queue = ServiceQueue()
-
+    
+    private lazy var queue = ServiceQueue()
+    private lazy var service = Service()
+    
     func initialise() {
         isLoading = true
         
@@ -28,22 +30,30 @@ class CitiesViewModel: NSObject {
     }
     
     func getCities() {
-        let service = Service.init(result: { response in
+//        let service = Service.init(result: { response in
+//
+//        }, completionBlock: {
+//            self.isLoading = false
+//        })
+        service.result = { response in
             self.tmpArray = response
             self.processFetchedData(data: response)
-        }, completionBlock: {
+        }
+        
+        service.completionBlock = {
             self.isLoading = false
-        })
+        }
         
         queue.startOperation(operation: service)
     }
     
     func filterData(text : String) {
-        let service = ServiceSearch.init(result: { response in
+        let searchService = ServiceSearch.init(result: { response in
             self.processFetchedData(data: response)
         }, completionBlock: {
         })
-        queue.startOperation(operation: service)
+        searchService.addDependency(service)
+        queue.startOperation(operation: searchService)
     }
     
     func cancelSearch() {
