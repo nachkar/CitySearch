@@ -8,10 +8,12 @@
 import Foundation
 
 class ServiceQueue : OperationQueue {
-    init(_ operation : Operation) {
+    override init() {
         super.init()
-        
         self.maxConcurrentOperationCount = 1
+    }
+    
+    func startOperation(operation : Operation) {
         self.addOperation(operation)
     }
 }

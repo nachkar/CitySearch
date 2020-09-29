@@ -35,3 +35,29 @@ class Service : Operation {
         }
     }
 }
+
+class ServiceSearch : Operation {
+    
+    var result: (_ response:[CitiesDataItem]) -> Void
+    
+    init(result: @escaping (_ response:[CitiesDataItem]) -> Void,completionBlock: @escaping () -> Void) {
+        self.result = result
+        
+        super.init()
+        
+        self.completionBlock = completionBlock
+    }
+    
+    override func main() {
+        if isCancelled {
+            return
+        }
+        
+        do {
+          //Filter Data
+//            result(sorted)
+        } catch {
+            result([])
+        }
+    }
+}

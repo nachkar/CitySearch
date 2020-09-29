@@ -14,6 +14,8 @@ protocol CitiesCoordinatorDelegate {
 class CitiesViewModel: NSObject {
         
     var coordinatorDelegate: CitiesCoordinatorDelegate?
+    var tmpArray = [CitiesDataItem]()
+    let queue = ServiceQueue()
 
     func initialise() {
         isLoading = true
@@ -27,12 +29,25 @@ class CitiesViewModel: NSObject {
     
     func getCities() {
         let service = Service.init(result: { response in
+            self.tmpArray = response
             self.processFetchedData(data: response)
         }, completionBlock: {
             self.isLoading = false
         })
         
-        _ = ServiceQueue(service)
+        queue.startOperation(operation: service)
+    }
+    
+    func filterData(text : String) {
+        let service = ServiceSearch.init(result: { response in
+            self.processFetchedData(data: response)
+        }, completionBlock: {
+        })
+        queue.startOperation(operation: service)
+    }
+    
+    func cancelSearch() {
+        self.processFetchedData(data: self.tmpArray)
     }
     
     var items: [CitiesTableViewCellViewModel] = [] {
