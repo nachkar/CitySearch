@@ -8,18 +8,43 @@
 import UIKit
 
 class CitiesListViewController: BaseViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
+    
     var viewModel: CitiesViewModel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupTableView()
         setupSearchBar()
         setupNavigationBar()
+        handleViewModel()
+    }
+    
+    func handleViewModel() {
+        weak var weakself = self
+        
+        viewModel.updateLoadingStatus = { isLoading in
+            DispatchQueue.main.async {
+                if isLoading {
+                    weakself?.activityIndicator?.isHidden = false
+                    weakself?.activityIndicator?.startAnimating()
+                } else {
+                    weakself?.activityIndicator?.isHidden = true
+                    weakself?.activityIndicator?.stopAnimating()
+                }
+            }
+        }
+        
+        viewModel.didFinishLoading = {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
+        viewModel.initialise()
     }
     
     func setupNavigationBar() {
@@ -35,7 +60,7 @@ class CitiesListViewController: BaseViewController {
         navigationItem.searchController = search
         navigationItem.hidesSearchBarWhenScrolling = false
     }
-
+    
     func setupTableView() {
         self.tableView.tableFooterView = UIView()
     }
@@ -47,16 +72,16 @@ extension CitiesListViewController: UISearchResultsUpdating, UISearchBarDelegate
         
         NSObject.cancelPreviousPerformRequests(withTarget: self)
         
-//        if Utilities.isStringNull(string: searchController.searchBar.text ?? "") {
-//            viewModel.cancelFilter()
-//            return
-//        }
+        //        if Utilities.isStringNull(string: searchController.searchBar.text ?? "") {
+        //            viewModel.cancelFilter()
+        //            return
+        //        }
         
         perform(#selector(searchText(text:)), with: searchController.searchBar.text!, afterDelay: 0.6)
     }
     
     @objc func searchText(text : String) {
-//        viewModel.filterData(text: text)
+        //        viewModel.filterData(text: text)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

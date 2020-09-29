@@ -57,7 +57,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="466-aW-lwO">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                             </mapView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Gnq-3h-3Sk"/>
@@ -65,7 +65,7 @@
                         <constraints>
                             <constraint firstItem="466-aW-lwO" firstAttribute="top" secondItem="Gnq-3h-3Sk" secondAttribute="top" id="0Py-22-QBG"/>
                             <constraint firstItem="Gnq-3h-3Sk" firstAttribute="trailing" secondItem="466-aW-lwO" secondAttribute="trailing" id="38t-iX-887"/>
-                            <constraint firstItem="Gnq-3h-3Sk" firstAttribute="bottom" secondItem="466-aW-lwO" secondAttribute="bottom" id="4cc-e2-Pxv"/>
+                            <constraint firstAttribute="bottom" secondItem="466-aW-lwO" secondAttribute="bottom" id="4cc-e2-Pxv"/>
                             <constraint firstItem="466-aW-lwO" firstAttribute="leading" secondItem="Gnq-3h-3Sk" secondAttribute="leading" id="EJD-t7-vOZ"/>
                         </constraints>
                     </view>

@@ -11,3 +11,8 @@ public enum ViewControllerIdentifier: String {
     case citiesList = "CitiesListViewController"
     case cityDetails     = "CityViewController"
 }
+
+struct CitiesFile {
+    static let FileName = "cities"
+    static let FileType = "json"
+}

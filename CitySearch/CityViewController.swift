@@ -29,6 +29,11 @@ class CityViewController: BaseViewController {
             selectedLocPoint.title = weakself?.viewModel.name
             selectedLocPoint.coordinate = CLLocationCoordinate2D(latitude: (weakself?.viewModel.coord!.lat)!, longitude: (weakself?.viewModel.coord!.lon)!)
             weakself?.mapView.addAnnotation(selectedLocPoint)
+            
+            weakself?.title = weakself?.viewModel.name
+            
+            let coordinateRegion = MKCoordinateRegion.init(center: selectedLocPoint.coordinate, span:  (weakself?.mapView.region.span)!)
+            weakself?.mapView.setRegion(coordinateRegion, animated: true)
         }
         
         viewModel.didFinishLoading()

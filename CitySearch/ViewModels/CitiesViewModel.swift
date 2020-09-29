@@ -16,6 +16,8 @@ class CitiesViewModel: NSObject {
     var coordinatorDelegate: CitiesCoordinatorDelegate?
 
     func initialise() {
+        isLoading = true
+        
         getCities()
     }
     
@@ -24,14 +26,13 @@ class CitiesViewModel: NSObject {
     }
     
     func getCities() {
-//        do
-//        {
-//            let path = Bundle.main.path(forResource: "", ofType: "") ?? ""
-//            let data = try Data(contentsOf: URL(fileURLWithPath:path), options: .mappedIfSafe)
-//            let model = try JSONDecoder().decode([CitiesDataItem].self, from: data)
-//        } catch {
-//
-//        }
+        let service = Service.init(success: { response in
+            self.processFetchedData(data: response)
+        }, completionBlock: {
+            self.isLoading = false
+        })
+        
+        _ = ServiceQueue(service)
     }
     
     var items: [CitiesTableViewCellViewModel] = [] {

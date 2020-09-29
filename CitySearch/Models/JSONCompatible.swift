@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol JSONCompatible {
+protocol JSONCompatible : Decodable {
     init?(json: [String: Any]?)
     init()
     init?(data: Data?)
