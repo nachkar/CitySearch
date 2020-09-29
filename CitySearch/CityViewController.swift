@@ -12,13 +12,28 @@ class CityViewController: BaseViewController {
 
     @IBOutlet weak var mapView: MKMapView!
 
+    var viewModel: CityMapViewModel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        handleViewModel()
     }
     
-
+    func handleViewModel() {
+        weak var weakself = self
+        
+        viewModel.didFinishProcessing = {
+            let selectedLocPoint = MKPointAnnotation()
+            selectedLocPoint.title = weakself?.viewModel.name
+            selectedLocPoint.coordinate = CLLocationCoordinate2D(latitude: (weakself?.viewModel.coord!.lat)!, longitude: (weakself?.viewModel.coord!.lon)!)
+            weakself?.mapView.addAnnotation(selectedLocPoint)
+        }
+        
+        viewModel.didFinishLoading()
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -28,5 +43,4 @@ class CityViewController: BaseViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
