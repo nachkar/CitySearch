@@ -30,10 +30,11 @@ class CityViewController: BaseViewController {
             selectedLocPoint.coordinate = CLLocationCoordinate2D(latitude: (weakself?.viewModel.coord!.lat)!, longitude: (weakself?.viewModel.coord!.lon)!)
             weakself?.mapView.addAnnotation(selectedLocPoint)
             
+            selectedLocPoint.title = weakself?.viewModel.name
             weakself?.title = weakself?.viewModel.name
             
-            let coordinateRegion = MKCoordinateRegion.init(center: selectedLocPoint.coordinate, span:  (weakself?.mapView.region.span)!)
-            weakself?.mapView.setRegion(coordinateRegion, animated: true)
+            let mapCamera = MKMapCamera(lookingAtCenter: selectedLocPoint.coordinate, fromEyeCoordinate: selectedLocPoint.coordinate, eyeAltitude: 1000.0)
+            weakself?.mapView.setCamera(mapCamera, animated: true)
         }
         
         viewModel.didFinishLoading()

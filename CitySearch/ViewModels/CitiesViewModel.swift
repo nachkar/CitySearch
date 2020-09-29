@@ -26,7 +26,7 @@ class CitiesViewModel: NSObject {
     }
     
     func getCities() {
-        let service = Service.init(success: { response in
+        let service = Service.init(result: { response in
             self.processFetchedData(data: response)
         }, completionBlock: {
             self.isLoading = false

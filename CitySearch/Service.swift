@@ -9,10 +9,10 @@ import Foundation
 
 class Service : Operation {
     
-    var success: (_ response:[CitiesDataItem]) -> Void
+    var result: (_ response:[CitiesDataItem]) -> Void
     
-    init(success: @escaping (_ response:[CitiesDataItem]) -> Void,completionBlock: @escaping () -> Void) {
-        self.success = success
+    init(result: @escaping (_ response:[CitiesDataItem]) -> Void,completionBlock: @escaping () -> Void) {
+        self.result = result
         
         super.init()
         
@@ -28,9 +28,10 @@ class Service : Operation {
             let path = Bundle.main.path(forResource: CitiesFile.FileName, ofType: CitiesFile.FileType) ?? ""
             let data = try Data(contentsOf: URL(fileURLWithPath:path), options: .mappedIfSafe)
             let model = try JSONDecoder().decode([CitiesDataItem].self, from: data)
-            success(model)
+            let sorted = model.sorted(by: {$0.name < $1.name})
+            result(sorted)
         } catch {
-            
+            result([])
         }
     }
 }
