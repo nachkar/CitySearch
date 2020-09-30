@@ -8,13 +8,13 @@
 import Foundation
 
 protocol OperationService {
-    var result: ((_ response : [CitiesDataItem]) -> ())? { get set }
-    init(result: @escaping (_ response:[CitiesDataItem]) -> Void,completionBlock: @escaping () -> Void)
+    var result: ((_ response : [CitiesDataItem], _ filterDict : Dictionary<Character,[CitiesDataItem]>) -> ())? { get set }
+    init(result: @escaping (_ response:[CitiesDataItem], _ filterDict : Dictionary<Character,[CitiesDataItem]>) -> Void,completionBlock: @escaping () -> Void)
 }
 
 class ServiceRead : Operation, OperationService  {
     
-    var result: ((_ response : [CitiesDataItem]) -> ())?
+    var result: ((_ response : [CitiesDataItem],_ filterDict : Dictionary<Character,[CitiesDataItem]>) -> ())?
     var fileName = CitiesFile.FileName
     var fileType = CitiesFile.FileType
     
@@ -22,7 +22,7 @@ class ServiceRead : Operation, OperationService  {
         super.init()
     }
     
-    required init(result: @escaping (_ response:[CitiesDataItem]) -> Void,completionBlock: @escaping () -> Void) {
+    required init(result: @escaping (_ response:[CitiesDataItem],_ filterDict : Dictionary<Character,[CitiesDataItem]>) -> Void,completionBlock: @escaping () -> Void) {
         self.result = result
 
         super.init()
@@ -43,9 +43,14 @@ class ServiceRead : Operation, OperationService  {
 //            let sections = Dictionary(grouping: sorted) { (city) -> Character in
 //                return city.name.first!
 //                }
-            result!(sorted)
+            //Grouped in dictionary where the Key is the first letter and value is the array of cities starting with this letter
+            let groups = Dictionary(grouping:  sorted) { (city) -> Character in
+                return city.name.lowercased().first!
+            }
+            
+            result!(sorted,groups)
         } catch {
-            result!([])
+            result!([],[:])
         }
     }
 }
@@ -54,9 +59,9 @@ class ServiceSearch : Operation {
     
     var result: (_ response:[CitiesDataItem]) -> Void
     var text: String
-    var cities: [CitiesDataItem]
+    var cities: Dictionary<Character,[CitiesDataItem]>
     
-    init(text : String, cities : [CitiesDataItem],result: @escaping (_ response:[CitiesDataItem]) -> Void,completionBlock: @escaping () -> Void) {
+    init(text : String, cities : Dictionary<Character,[CitiesDataItem]>,result: @escaping (_ response:[CitiesDataItem]) -> Void,completionBlock: @escaping () -> Void) {
         self.result = result
         self.text = text
         self.cities = cities
@@ -71,8 +76,10 @@ class ServiceSearch : Operation {
             return
         }
         
+        let array = self.cities[text.lowercased().first!]
+        
         //Filter Data // Linear Algorithm
-        let filteredArray = self.cities.filter({$0.name.lowercased().hasPrefix(text.lowercased())})
+        let filteredArray = array?.filter({$0.name.lowercased().hasPrefix(text.lowercased())}) ?? []
         result(filteredArray)
     }
 }

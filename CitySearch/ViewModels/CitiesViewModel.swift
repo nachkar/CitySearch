@@ -14,16 +14,20 @@ protocol CitiesCoordinatorDelegate {
 class CitiesViewModel: NSObject {
         
     var coordinatorDelegate: CitiesCoordinatorDelegate?
-    var tmpArray = [CitiesDataItem]()
     
+    var filterDict = Dictionary<Character,[CitiesDataItem]>()
+    var allArray = [CitiesDataItem]()
+
     private lazy var queue = ServiceQueue()
     private lazy var service = ServiceRead()
     
     func initialise() {
         isLoading = true
         
-        getCities { response in
-            self.tmpArray = response
+        getCities { response, dictionary in
+            self.filterDict = dictionary
+            self.allArray = response
+            
             self.processFetchedData(data: response)
         }
     }
@@ -33,7 +37,7 @@ class CitiesViewModel: NSObject {
     }
     
     //Added completion handler for test cases
-    func getCities(_ fileName : String = CitiesFile.FileName,_ fileType : String = CitiesFile.FileType, result: @escaping (_ response:[CitiesDataItem]) -> Void) {
+    func getCities(_ fileName : String = CitiesFile.FileName,_ fileType : String = CitiesFile.FileType, result: @escaping (_ response:[CitiesDataItem],_ dictionary:Dictionary<Character,[CitiesDataItem]>) -> Void) {
 //        let service = Service.init(result: { response in
 //
 //        }, completionBlock: {
@@ -44,8 +48,8 @@ class CitiesViewModel: NSObject {
         service.fileName = fileName
         service.fileType = fileType
         
-        service.result = { response in
-          result(response)
+        service.result = { response, dictionary in
+          result(response,dictionary)
         }
         
         service.completionBlock = {
@@ -57,7 +61,7 @@ class CitiesViewModel: NSObject {
     
     //Added completion handler for test cases
     func filterData(text : String, result: @escaping (_ response:[CitiesDataItem]) -> Void) {
-        let searchService = ServiceSearch.init(text: text, cities: self.tmpArray, result: { response in
+        let searchService = ServiceSearch.init(text: text, cities: self.filterDict, result: { response in
             result(response)
             
             self.processFetchedData(data: response)
@@ -68,7 +72,7 @@ class CitiesViewModel: NSObject {
     }
     
     func cancelSearch() {
-        self.processFetchedData(data: self.tmpArray)
+        self.processFetchedData(data: self.allArray)
     }
     
     var isLoading: Bool = false {

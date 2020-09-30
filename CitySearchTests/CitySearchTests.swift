@@ -44,10 +44,13 @@ class CitySearchTests: XCTestCase {
     }
     
     func openFileAndProcess() {
+        weak var weakself = self
+
         let testExp = XCTestExpectation(description: "Read and process file")
         
-        viewModel.getCities(JsonFile.fileName,JsonFile.fileType,result: {response in
-            self.viewModel.tmpArray = response
+        viewModel.getCities(JsonFile.fileName,JsonFile.fileType,result: {response, dict in
+            weakself?.viewModel.allArray = response
+            weakself?.viewModel.filterDict = dict
             
             let firstCity = response[0]
             XCTAssertEqual(firstCity.name,CitiesDataItem.getCity().name)
