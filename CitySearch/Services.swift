@@ -7,15 +7,22 @@
 
 import Foundation
 
-class ServiceRead : Operation {
+protocol OperationService {
+    var result: ((_ response : [CitiesDataItem]) -> ())? { get set }
+    init(result: @escaping (_ response:[CitiesDataItem]) -> Void,completionBlock: @escaping () -> Void)
+}
+
+class ServiceRead : Operation, OperationService  {
     
     var result: ((_ response : [CitiesDataItem]) -> ())?
-
+    var fileName = CitiesFile.FileName
+    var fileType = CitiesFile.FileType
+    
     override init() {
         super.init()
     }
     
-    init(result: @escaping (_ response:[CitiesDataItem]) -> Void,completionBlock: @escaping () -> Void) {
+    required init(result: @escaping (_ response:[CitiesDataItem]) -> Void,completionBlock: @escaping () -> Void) {
         self.result = result
 
         super.init()
@@ -29,10 +36,13 @@ class ServiceRead : Operation {
         }
         
         do {
-            let path = Bundle.main.path(forResource: CitiesFile.FileName, ofType: CitiesFile.FileType) ?? ""
+            let path = Bundle.main.path(forResource: fileName, ofType: fileType) ?? ""
             let data = try Data(contentsOf: URL(fileURLWithPath:path), options: .mappedIfSafe)
             let model = try JSONDecoder().decode([CitiesDataItem].self, from: data)
             let sorted = model.sorted(by: {$0.name < $1.name})
+//            let sections = Dictionary(grouping: sorted) { (city) -> Character in
+//                return city.name.first!
+//                }
             result!(sorted)
         } catch {
             result!([])

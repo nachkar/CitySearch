@@ -70,18 +70,21 @@ extension CitiesListViewController: UISearchResultsUpdating, UISearchBarDelegate
     
     func updateSearchResults(for searchController: UISearchController) {
         
-        NSObject.cancelPreviousPerformRequests(withTarget: self)
+//        NSObject.cancelPreviousPerformRequests(withTarget: self)
         
         if (searchController.searchBar.text?.isEmpty == true) {
             viewModel.cancelSearch()
             return
         }
         
-        perform(#selector(searchText(text:)), with: searchController.searchBar.text!, afterDelay: 0.6)
+        searchText(text: searchController.searchBar.text!)
+//        perform(#selector(searchText(text:)), with: searchController.searchBar.text!, afterDelay: 0.6)
     }
     
     @objc func searchText(text : String) {
-        viewModel.filterData(text: text)
+        viewModel.filterData(text: text,result: {response in
+            print("Filtration finished")
+        })
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

@@ -22,22 +22,30 @@ class CitiesViewModel: NSObject {
     func initialise() {
         isLoading = true
         
-        getCities()
+        getCities { response in
+            self.tmpArray = response
+            self.processFetchedData(data: response)
+        }
     }
     
     func citySelected(city : CitiesTableViewCellViewModel) {
         self.coordinatorDelegate?.didSelectCity(viewModel: city)
     }
     
-    func getCities() {
+    //Added completion handler for test cases
+    func getCities(_ fileName : String = CitiesFile.FileName,_ fileType : String = CitiesFile.FileType, result: @escaping (_ response:[CitiesDataItem]) -> Void) {
 //        let service = Service.init(result: { response in
 //
 //        }, completionBlock: {
 //            self.isLoading = false
 //        })
+        
+        //By default cities.json file
+        service.fileName = fileName
+        service.fileType = fileType
+        
         service.result = { response in
-            self.tmpArray = response
-            self.processFetchedData(data: response)
+          result(response)
         }
         
         service.completionBlock = {
@@ -47,8 +55,11 @@ class CitiesViewModel: NSObject {
         queue.startOperation(operation: service)
     }
     
-    func filterData(text : String) {
+    //Added completion handler for test cases
+    func filterData(text : String, result: @escaping (_ response:[CitiesDataItem]) -> Void) {
         let searchService = ServiceSearch.init(text: text, cities: self.tmpArray, result: { response in
+            result(response)
+            
             self.processFetchedData(data: response)
         }, completionBlock: {
         })

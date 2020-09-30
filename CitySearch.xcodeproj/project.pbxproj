@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62160C70252480CB0017A877 /* citiesTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 62160C6F252480CA0017A877 /* citiesTest.json */; };
+		62160C74252482870017A877 /* citiesTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 62160C6F252480CA0017A877 /* citiesTest.json */; };
 		62207FBE2523B7C200D1BAAF /* ServiceQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62207FBD2523B7C200D1BAAF /* ServiceQueue.swift */; };
 		6223E1E82523ABA00081CACB /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6223E1E62523ABA00081CACB /* AppCoordinator.swift */; };
 		6223E1F12523ABE20081CACB /* CityMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6223E1F02523ABE20081CACB /* CityMapViewModel.swift */; };
@@ -53,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		62160C6F252480CA0017A877 /* citiesTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = citiesTest.json; sourceTree = "<group>"; };
 		62207FBD2523B7C200D1BAAF /* ServiceQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceQueue.swift; sourceTree = "<group>"; };
 		6223E1E62523ABA00081CACB /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6223E1F02523ABE20081CACB /* CityMapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityMapViewModel.swift; sourceTree = "<group>"; };
@@ -183,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				62ED72D22521F10B004FD480 /* CitySearchTests.swift */,
+				62160C6F252480CA0017A877 /* citiesTest.json */,
 				62ED72D42521F10B004FD480 /* Info.plist */,
 			);
 			path = CitySearchTests;
@@ -318,6 +322,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62160C74252482870017A877 /* citiesTest.json in Resources */,
 				6223E2032523B11E0081CACB /* cities.json in Resources */,
 				62ED72C82521F10B004FD480 /* LaunchScreen.storyboard in Resources */,
 				62ED72C52521F10B004FD480 /* Assets.xcassets in Resources */,
@@ -329,6 +334,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62160C70252480CB0017A877 /* citiesTest.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
