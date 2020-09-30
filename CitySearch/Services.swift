@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Service : Operation {
+class ServiceRead : Operation {
     
     var result: ((_ response : [CitiesDataItem]) -> ())?
 
@@ -43,9 +43,13 @@ class Service : Operation {
 class ServiceSearch : Operation {
     
     var result: (_ response:[CitiesDataItem]) -> Void
+    var text: String
+    var cities: [CitiesDataItem]
     
-    init(result: @escaping (_ response:[CitiesDataItem]) -> Void,completionBlock: @escaping () -> Void) {
+    init(text : String, cities : [CitiesDataItem],result: @escaping (_ response:[CitiesDataItem]) -> Void,completionBlock: @escaping () -> Void) {
         self.result = result
+        self.text = text
+        self.cities = cities
         
         super.init()
         
@@ -57,11 +61,8 @@ class ServiceSearch : Operation {
             return
         }
         
-        do {
-          //Filter Data
-//            result(sorted)
-        } catch {
-            result([])
-        }
+        //Filter Data // Linear Algorithm
+        let filteredArray = self.cities.filter({$0.name.lowercased().hasPrefix(text.lowercased())})
+        result(filteredArray)
     }
 }

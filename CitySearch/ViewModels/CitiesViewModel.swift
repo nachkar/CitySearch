@@ -17,7 +17,7 @@ class CitiesViewModel: NSObject {
     var tmpArray = [CitiesDataItem]()
     
     private lazy var queue = ServiceQueue()
-    private lazy var service = Service()
+    private lazy var service = ServiceRead()
     
     func initialise() {
         isLoading = true
@@ -48,7 +48,7 @@ class CitiesViewModel: NSObject {
     }
     
     func filterData(text : String) {
-        let searchService = ServiceSearch.init(result: { response in
+        let searchService = ServiceSearch.init(text: text, cities: self.tmpArray, result: { response in
             self.processFetchedData(data: response)
         }, completionBlock: {
         })
@@ -58,10 +58,6 @@ class CitiesViewModel: NSObject {
     
     func cancelSearch() {
         self.processFetchedData(data: self.tmpArray)
-    }
-    
-    var items: [CitiesTableViewCellViewModel] = [] {
-        didSet { self.didFinishLoading?() }
     }
     
     var isLoading: Bool = false {
@@ -78,6 +74,10 @@ class CitiesViewModel: NSObject {
     
     var itemCount: Int {
         get { return items.count }
+    }
+    
+    var items: [CitiesTableViewCellViewModel] = [] {
+        didSet { self.didFinishLoading?() }
     }
     
     //Cells
