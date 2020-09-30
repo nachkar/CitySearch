@@ -40,10 +40,8 @@ class ServiceRead : Operation, OperationService  {
             let data = try Data(contentsOf: URL(fileURLWithPath:path), options: .mappedIfSafe)
             let model = try JSONDecoder().decode([CitiesDataItem].self, from: data)
             let sorted = model.sorted(by: {$0.name < $1.name})
-//            let sections = Dictionary(grouping: sorted) { (city) -> Character in
-//                return city.name.first!
-//                }
-            //Grouped in dictionary where the Key is the first letter and value is the array of cities starting with this letter
+
+            //Grouped in dictionary where the Key is the first letter and value is the array of cities which name is starting with this letter instead of searching the 200K entries, only the cities with the same prefix letter will be searched
             let groups = Dictionary(grouping:  sorted) { (city) -> Character in
                 return city.name.lowercased().first!
             }
@@ -79,6 +77,7 @@ class ServiceSearch : Operation {
         let array = self.cities[text.lowercased().first!]
         
         //Filter Data // Linear Algorithm
+        //Using filter function has a complexity of O(n) when going through all records to find the required ones so filtering only the values from the dictionary having the key the first letter of the searched text reduced the processing time + /10
         let filteredArray = array?.filter({$0.name.lowercased().hasPrefix(text.lowercased())}) ?? []
         result(filteredArray)
     }
