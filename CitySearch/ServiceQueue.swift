@@ -14,6 +14,12 @@ class ServiceQueue : OperationQueue {
     }
     
     func startOperation(operation : Operation) {
+        //In case 2 search operations are executing at the same time to stop the previous one
+        let finishedRead = self.operations.map{ ($0.name == "read")}
+        if finishedRead.count == 0 && self.operationCount > 0 {
+            self.cancelAllOperations()
+        }
+        
         self.addOperation(operation)
     }
 }

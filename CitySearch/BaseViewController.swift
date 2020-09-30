@@ -20,8 +20,6 @@ class BaseViewController: UIViewController {
     func setupNavigation() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
-        navigationController?.view.backgroundColor = UIColor.white
     }
     
     /*

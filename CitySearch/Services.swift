@@ -20,6 +20,7 @@ class ServiceRead : Operation, OperationService  {
     
     override init() {
         super.init()
+        self.name = "read"
     }
     
     required init(result: @escaping (_ response:[CitiesDataItem],_ filterDict : Dictionary<Character,[CitiesDataItem]>) -> Void,completionBlock: @escaping () -> Void) {
@@ -27,6 +28,7 @@ class ServiceRead : Operation, OperationService  {
 
         super.init()
 
+        self.name = "read"
         self.completionBlock = completionBlock
     }
 
@@ -66,6 +68,7 @@ class ServiceSearch : Operation {
         
         super.init()
         
+        self.name = "search"
         self.completionBlock = completionBlock
     }
     
@@ -77,7 +80,7 @@ class ServiceSearch : Operation {
         let array = self.cities[text.lowercased().first!]
         
         //Filter Data // Linear Algorithm
-        //Using filter function has a complexity of O(n) when going through all records to find the required ones so filtering only the values from the dictionary having the key the first letter of the searched text reduced the processing time + /10
+        //Using filter function has a complexity of O(n) when going through all records to find the required ones so filtering only the values from the dictionary having the key the first letter (Complexity O(1)) of the searched text reduced the processing time + /10
         let filteredArray = array?.filter({$0.name.lowercased().hasPrefix(text.lowercased())}) ?? []
         result(filteredArray)
     }

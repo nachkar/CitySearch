@@ -72,7 +72,9 @@ class CitiesViewModel: NSObject {
     }
     
     func cancelSearch() {
-        self.processFetchedData(data: self.allArray)
+        if self.allArray.count > 0 {
+            self.processFetchedData(data: self.allArray)
+        }
     }
     
     var isLoading: Bool = false {

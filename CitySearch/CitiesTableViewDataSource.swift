@@ -20,9 +20,11 @@ extension CitiesListViewController : UITableViewDataSource {
             cell = UITableViewCell.init(style: .subtitle, reuseIdentifier: "CitiesCell")
         }
         
-        let model = viewModel.items[indexPath.row]
-        cell?.textLabel?.text = "\(model.name), \(model.country)"
-        cell?.detailTextLabel?.text = "\(model.coord.lat),\(model.coord.lon)"
+        if viewModel.items.count > 0 {
+            let model = viewModel.items[indexPath.row]
+            cell?.textLabel?.text = "\(model.name), \(model.country)"
+            cell?.detailTextLabel?.text = "\(model.coord.lat),\(model.coord.lon)"
+        }
         
         return cell!
     }
