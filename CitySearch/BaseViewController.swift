@@ -9,19 +9,19 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
         setupNavigation()
     }
-    
+
     func setupNavigation() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
     }
-    
+
     /*
      // MARK: - Navigation
      
@@ -31,5 +31,5 @@ class BaseViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    
+
 }

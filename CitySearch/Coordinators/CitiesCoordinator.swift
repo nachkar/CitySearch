@@ -8,7 +8,7 @@
 import UIKit
 
 class CitiesCoordinator: Coordinator {
-    
+
     private let navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {
@@ -22,7 +22,7 @@ class CitiesCoordinator: Coordinator {
         viewController.viewModel = viewModel
         self.navigationController.setViewControllers([viewController], animated: true)
     }
-    
+
     func showDetailsVC(viewModel: CitiesTableViewCellViewModel) {
         let viewModel = CityMapViewModel(city: viewModel)
         let viewController = AppDelegate.storyBoard.getViewController(identifier: .cityDetails) as! CityViewController
@@ -31,7 +31,7 @@ class CitiesCoordinator: Coordinator {
     }
 }
 
-extension CitiesCoordinator : CitiesCoordinatorDelegate {
+extension CitiesCoordinator: CitiesCoordinatorDelegate {
     func didSelectCity(viewModel: CitiesTableViewCellViewModel) {
         showDetailsVC(viewModel: viewModel)
     }

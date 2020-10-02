@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 class AppCoordinator: Coordinator {
-    
+
     fileprivate let navigationController: UINavigationController
-    
+
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-    
+
     override func start() {
         startMain()
     }

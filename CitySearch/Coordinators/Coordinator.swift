@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Coordinator {    
+class Coordinator {
     func start() {
         fatalError("Start method should be implemented.")
     }

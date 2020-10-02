@@ -11,7 +11,7 @@ import XCTest
 class CitySearchTests: XCTestCase {
 
     let viewModel = CitiesViewModel()
-    
+
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         openFileAndProcess()
@@ -26,43 +26,43 @@ class CitySearchTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         viewModel.filterData(text: "hur", result: { response in
             let firstCity = response[0]
-            XCTAssertEqual(firstCity.name,CitiesDataItem.getCity().name)
-            XCTAssertEqual(firstCity.coord.lat,CitiesDataItem.getCity().coord.lat)
-            XCTAssertEqual(firstCity.coord.lon,CitiesDataItem.getCity().coord.lon)
+            XCTAssertEqual(firstCity.name, CitiesDataItem.getCity().name)
+            XCTAssertEqual(firstCity.coord.lat, CitiesDataItem.getCity().coord.lat)
+            XCTAssertEqual(firstCity.coord.lon, CitiesDataItem.getCity().coord.lon)
         })
-        
+
         viewModel.filterData(text: "nov", result: { response in
             let firstCity = response[0]
-            XCTAssertNotEqual(firstCity.name,CitiesDataItem.getCity().name)
-            XCTAssertNotEqual(firstCity.coord.lat,CitiesDataItem.getCity().coord.lat)
-            XCTAssertNotEqual(firstCity.coord.lon,CitiesDataItem.getCity().coord.lon)
+            XCTAssertNotEqual(firstCity.name, CitiesDataItem.getCity().name)
+            XCTAssertNotEqual(firstCity.coord.lat, CitiesDataItem.getCity().coord.lat)
+            XCTAssertNotEqual(firstCity.coord.lon, CitiesDataItem.getCity().coord.lon)
         })
-        
+
         viewModel.filterData(text: "abc", result: { response in
             XCTAssertEqual(response.count, 0)
         })
     }
-    
+
     func openFileAndProcess() {
         weak var weakself = self
 
         let testExp = XCTestExpectation(description: "Read and process file")
-        
-        viewModel.getCities(JsonFile.fileName,JsonFile.fileType,result: {response, dict in
+
+        viewModel.getCities(JsonFile.fileName, JsonFile.fileType, result: {response, dict in
             weakself?.viewModel.allArray = response
             weakself?.viewModel.filterDict = dict
-            
+
             let firstCity = response[0]
-            XCTAssertEqual(firstCity.name,CitiesDataItem.getCity().name)
-            XCTAssertEqual(firstCity.coord.lat,CitiesDataItem.getCity().coord.lat)
-            XCTAssertEqual(firstCity.coord.lon,CitiesDataItem.getCity().coord.lon)
-            
+            XCTAssertEqual(firstCity.name, CitiesDataItem.getCity().name)
+            XCTAssertEqual(firstCity.coord.lat, CitiesDataItem.getCity().coord.lat)
+            XCTAssertEqual(firstCity.coord.lon, CitiesDataItem.getCity().coord.lon)
+
             testExp.fulfill()
         })
-        
+
         wait(for: [testExp], timeout: 5.0)
     }
-    
+
     func testPerformance() throws {
         // This is an example of a performance test case.
         self.measure {

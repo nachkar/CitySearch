@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIStoryboard {
-    func getViewController(identifier : ViewControllerIdentifier) -> UIViewController {
+    func getViewController(identifier: ViewControllerIdentifier) -> UIViewController {
         return self.instantiateViewController(withIdentifier: identifier.rawValue)
     }
 }

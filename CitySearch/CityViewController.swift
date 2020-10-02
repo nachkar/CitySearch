@@ -20,26 +20,26 @@ class CityViewController: BaseViewController {
         // Do any additional setup after loading the view.
         handleViewModel()
     }
-    
+
     func handleViewModel() {
         weak var weakself = self
-        
+
         viewModel.didFinishProcessing = {
             let selectedLocPoint = MKPointAnnotation()
             selectedLocPoint.title = weakself?.viewModel.name
             selectedLocPoint.coordinate = CLLocationCoordinate2D(latitude: (weakself?.viewModel.coord!.lat)!, longitude: (weakself?.viewModel.coord!.lon)!)
             weakself?.mapView.addAnnotation(selectedLocPoint)
-            
+
             selectedLocPoint.title = weakself?.viewModel.name
             weakself?.title = weakself?.viewModel.name
-            
+
             let mapCamera = MKMapCamera(lookingAtCenter: selectedLocPoint.coordinate, fromEyeCoordinate: selectedLocPoint.coordinate, eyeAltitude: 1000.0)
             weakself?.mapView.setCamera(mapCamera, animated: true)
         }
-        
+
         viewModel.didFinishLoading()
     }
-    
+
     /*
     // MARK: - Navigation
 
